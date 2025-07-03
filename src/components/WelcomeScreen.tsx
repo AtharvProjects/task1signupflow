@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface WelcomeScreenProps {
-  onNavigate: (screen: 'welcome' | 'profile' | 'signup') => void;
+  onNavigate: (screen: 'welcome' | 'profile' | 'signup' | 'login') => void;
 }
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
@@ -10,7 +10,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
     <div className="screen active">
       <div className="logo-container">
         <div className="logo">
-          <img src="/lovable-uploads/ef7471d2-15f5-4916-8db9-e5fd7038dc12.png" alt="CodSoft Logo" />
+          <div className="text-6xl font-bold text-purple-600 bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg">
+            CS
+          </div>
         </div>
       </div>
       
@@ -62,7 +64,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
       </button>
       
       <div className="bottom-text">
-        👋 Already have an account?
+        👋 Already have an account? <button onClick={() => onNavigate('login')} className="text-purple-600 hover:text-purple-700 font-semibold transition-colors">Sign In</button>
       </div>
     </div>
   );

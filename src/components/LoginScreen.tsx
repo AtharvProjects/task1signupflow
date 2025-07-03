@@ -6,7 +6,7 @@ import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface LoginScreenProps {
-  onNavigate: (screen: 'welcome' | 'signup' | 'login') => void;
+  onNavigate: (screen: 'welcome' | 'signup' | 'login' | 'profile') => void;
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ onNavigate }) => {
@@ -40,7 +40,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onNavigate }) => {
     if (validateForm()) {
       toast({
         title: "Login successful!",
-        description: "Welcome back to AppFlow.",
+        description: "Welcome back to CodSoft.",
       });
     }
   };

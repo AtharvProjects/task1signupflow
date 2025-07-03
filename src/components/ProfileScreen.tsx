@@ -8,7 +8,7 @@ interface ProfileData {
 }
 
 interface ProfileScreenProps {
-  onNavigate: (screen: 'welcome' | 'profile' | 'signup') => void;
+  onNavigate: (screen: 'welcome' | 'profile' | 'signup' | 'login') => void;
   onSubmit: (data: ProfileData) => void;
 }
 
