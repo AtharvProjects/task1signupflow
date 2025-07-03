@@ -1,27 +1,57 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+import React, { useState } from 'react';
+import { Toaster } from '@/components/ui/toaster';
+import WelcomeScreen from '@/components/WelcomeScreen';
+import ProfileScreen from '@/components/ProfileScreen';
+import SignupScreen from '@/components/SignupScreen';
+import StatusBar from '@/components/StatusBar';
+import './App.css';
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+type Screen = 'welcome' | 'profile' | 'signup';
+
+function App() {
+  const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
+  const [profileData, setProfileData] = useState({
+    firstName: '',
+    lastName: '',
+    role: ''
+  });
+
+  const navigateToScreen = (screen: Screen) => {
+    setCurrentScreen(screen);
+  };
+
+  const handleProfileSubmit = (data: typeof profileData) => {
+    setProfileData(data);
+    navigateToScreen('signup');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 flex items-center justify-center p-4">
+      <div className="phone-container">
+        <StatusBar />
+        
+        <div className="screen-content">
+          {currentScreen === 'welcome' && (
+            <WelcomeScreen onNavigate={navigateToScreen} />
+          )}
+          {currentScreen === 'profile' && (
+            <ProfileScreen 
+              onNavigate={navigateToScreen} 
+              onSubmit={handleProfileSubmit}
+            />
+          )}
+          {currentScreen === 'signup' && (
+            <SignupScreen 
+              onNavigate={navigateToScreen}
+              profileData={profileData}
+            />
+          )}
+        </div>
+      </div>
       <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </div>
+  );
+}
 
 export default App;
