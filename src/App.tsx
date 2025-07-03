@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import WelcomeScreen from '@/components/WelcomeScreen';
 import ProfileScreen from '@/components/ProfileScreen';
-import SignupScreen from '@/components/SignupScreen';
+import SignUpScreen from '@/components/SignUpScreen';
+import LoginScreen from '@/components/LoginScreen';
 import StatusBar from '@/components/StatusBar';
 import './App.css';
 
-type Screen = 'welcome' | 'profile' | 'signup';
+type Screen = 'welcome' | 'profile' | 'signup' | 'login';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
@@ -42,9 +43,13 @@ function App() {
             />
           )}
           {currentScreen === 'signup' && (
-            <SignupScreen 
+            <SignUpScreen 
               onNavigate={navigateToScreen}
-              profileData={profileData}
+            />
+          )}
+          {currentScreen === 'login' && (
+            <LoginScreen 
+              onNavigate={navigateToScreen}
             />
           )}
         </div>
